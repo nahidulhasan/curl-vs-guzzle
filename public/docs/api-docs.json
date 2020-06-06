@@ -1,0 +1,144 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "L5 Swagger API",
+        "description": "L5 Swagger API description",
+        "contact": {
+            "email": "arifulislam@bs-23.net"
+        },
+        "version": "1.0.0"
+    },
+    "host": "mybl-api.test",
+    "basePath": "/api/v1",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/push/notification/": {
+            "post": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Send notification",
+                "description": "Send firebase push notification data",
+                "operationId": "sendPushNotification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Body data",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "title": {
+                                    "description": "Send push notification",
+                                    "type": "string"
+                                },
+                                "body": {
+                                    "description": "Send push notification",
+                                    "type": "string"
+                                },
+                                "send_to_type": {
+                                    "description": "Send push notification",
+                                    "type": "string"
+                                },
+                                "recipients": {
+                                    "description": "Send push notification",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "is_interactive": {
+                                    "description": "Send push notification",
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "description": "Send push notification",
+                                    "properties": {
+                                        "cid": {
+                                            "description": "Send push notification",
+                                            "type": "integer"
+                                        },
+                                        "url": {
+                                            "description": "Send push notification",
+                                            "type": "string"
+                                        },
+                                        "component": {
+                                            "description": "Send push notification",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "app-key",
+                        "in": "header",
+                        "description": "authorization header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/push/notification/{id}": {
+            "get": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Get notification information",
+                "description": "Returns notification data",
+                "operationId": "getNotificationDetails",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "notification id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "app-key",
+                        "in": "header",
+                        "description": "authorization header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
