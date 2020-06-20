@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Contracts\LoginInterface;
+use App\Services\NewIdpIntegrationService;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Telescope\TelescopeServiceProvider;
 
@@ -14,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(LoginInterface::class, NewIdpIntegrationService::class);
     }
 
     /**

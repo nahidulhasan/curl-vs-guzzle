@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Contracts\LoginInterface;
 use App\Events\SignUpBonus;
 use App\Exceptions\BLServiceException;
 use App\Exceptions\CurlRequestException;
@@ -34,6 +35,11 @@ class RegistrationService extends ApiBaseService
 {
 
     /**
+     * @var LoginInterface
+     */
+    protected $loginInterface;
+
+    /**
      * @var CustomerRepository
      */
     protected $customerRepository;
@@ -62,11 +68,15 @@ class RegistrationService extends ApiBaseService
      */
     protected $customerService;
 
+    /**
+     * @var IDMIntegrationService
+     */
     protected $idmIntegrationService;
 
 
     /**
      * RegistrationService constructor.
+     * @param LoginInterface $loginInterface
      * @param CustomerRepository $customerRepository
      * @param OtpRepository $otpRepository
      * @param BanglalinkOtpService $blOtpService
@@ -76,6 +86,7 @@ class RegistrationService extends ApiBaseService
      * @param IDMIntegrationService $idmIntegrationService
      */
     public function __construct(
+        LoginInterface $loginInterface,
         CustomerRepository $customerRepository,
         OtpRepository $otpRepository,
         BanglalinkOtpService $blOtpService,
@@ -218,7 +229,12 @@ class RegistrationService extends ApiBaseService
     {
         $number = $request->input('username');
 
+        $new_login_response = $this->loginInterface->login($request->all());
+
+       // dd($new_login_response);
+
         $login_response = IdpIntegrationService::loginRequest($request->all());
+
 
         $login_response = json_decode($login_response['response'], true);
 
